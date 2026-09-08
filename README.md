@@ -32,7 +32,7 @@ python -m pip install numpy matplotlib        # 其余只用标准库
 
 python scripts/run_v2_e1.py      # E1 正确性与阈值曲线
 python scripts/run_v2_e3.py      # E3 缩尺格攻击（相变）
-python scripts/run_v2_e2.py      # E2 同安全级性能对照（首次会生成 RSA-3072 密钥并缓存）
+python scripts/run_v2_e2.py      # E2 同安全级性能对照（RSA 采用系统 OpenSSL speed）
 python scripts/run_v2_e4.py      # E4 区块链场景（膨胀/TPS）
 python scripts/make_figures_v2.py
 
@@ -63,14 +63,14 @@ python tests/test_core.py        # v1 遗留单测
 ### E2 性能对照（同一机器；NIST 项为官方尺寸，非本机）
 | 方案 | pk / sk / 签名(字节) | 签发中位(ms) | p99(ms) | 验签中位(ms) |
 | --- | --- | --- | --- | --- |
-| Track A LWE 标签(对称) | – / 144 / 288 | 2.45 | 4.50 | 0.100 |
-| Track B 格签名(ringless) | 229376 / 65536 / 544 | 1.31 | 9.14 | 0.155 |
-| RSA-3072-PSS（纯 stdlib 实测） | 384 / 384 / 384 | 63.19 | 63.19 | 0.307 |
+| Track A LWE 标签(对称) | – / 144 / 288 | 2.34 | 4.99 | 0.098 |
+| Track B 格签名(ringless) | 229376 / 65536 / 544 | 1.36 | 9.66 | 0.160 |
+| RSA-3072-PSS（OpenSSL 3.5.7 实测） | 384 / 384 / 384 | 7.39 | 7.39 | 0.135 |
 | ML-DSA-44 (FIPS 204 官方) | 1312 / 2560 / 2420 | 参考 | 参考 | 参考 |
 | FN-DSA-512 (FIPS 206 官方) | 897 / 1281 / 666 | 参考 | 参考 | 参考 |
 
 要点：
-- Track B 签名**拒绝次数** 中位 6、p99=40、max=57 → 拒绝采样带来显著长尾，
+- Track B 签名**拒绝次数** 中位 6、p99=35、max=61 → 拒绝采样带来显著长尾，
   只报均值会误导（对齐 ePrint 2026/1333 的批评）。见 `v2_fig5`。
 - Track B ringless 公钥 ~224 KB ≫ ML-DSA 1312 B：这是“为什么正式方案需要
   module/ring 结构”的直接工程证据（NTT/环结构把公钥压缩三个数量级）。
@@ -79,8 +79,8 @@ python tests/test_core.py        # v1 遗留单测
 | 方案 | 每笔记账字节 | 区块膨胀 | 验签 TPS(估) |
 | --- | --- | --- | --- |
 | Track A 标签 | 288 | 4.5× | ~1.0 万 |
-| Track B 签名 | 544 | 8.5× | ~6.4 千 |
-| RSA-3072-PSS | 384 | 6.0× | ~3.3 千 |
+| Track B 签名 | 544 | 8.5× | ~6.3 千 |
+| RSA-3072-PSS | 384 | 6.0× | ~7.4 千 |
 | ML-DSA-44（官方尺寸+文献耗时） | 2420 | 37.8× | ~2.0 万 |
 | FN-DSA-512 | 666 | 10.4× | ~1.25 万 |
 | ECDSA P-256（基线） | 64 | 1.0× | ~10 万 |
