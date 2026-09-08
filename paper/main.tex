@@ -1,0 +1,142 @@
+\documentclass[11pt]{article}
+% ============================================================
+% arXiv 技术报告骨架（草稿 v0.1，2026-09-08）
+% 定位：可复现的设计空间研究 + 参数方法学 + 评测口径，不主张
+% “可证明安全的新方案”。作者/机构信息待补。
+% ============================================================
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{microtype}
+\graphicspath{{../docs/figures_v2/}}
+
+\title{Reproducible Design-Space Study of Lightweight Lattice-Based\\ Authentication and Signatures for Blockchain Transactions}
+\author{Authors TBD\thanks{affiliations TBD} \\ \texttt{TBD}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Quantum computers threaten classical public-key cryptography (RSA/ECDSA); NIST has
+therefore standardized lattice-based primitives (ML-DSA/FIPS~204, FN-DSA/FIPS~206).
+We report a reproducible, teaching-level study of two lightweight lattice-based
+constructions aimed at blockchain transaction authentication: (i)~a symmetric LWE
+authentication tag whose matrix is derived per transaction from the transaction hash
+(``one-transaction-one-matrix''), and (ii)~a public-key lattice signature in the
+Lyubashevsky Fiat--Shamir-with-aborts style.  Our contributions are methodological
+and empirical: (a)~a parameter-instantiation workflow combining a root-Hermite /
+core-SVP estimator with scaled-down LLL embedding attacks, validated by matching
+``phase-transition'' experiments; (b)~a transaction-derived matrix variant that
+removes the need to transmit/reuse matrix seeds; (c)~a benchmark suite aligned with
+recent critiques of ML-DSA evaluation methodology, reporting full latency
+distributions and rejection-sampling worst cases rather than means only.  All code,
+data, and figures are open source and fully reproducible.  We do \emph{not} claim
+formal security proofs; formal analysis and module/ring-structured instantiations
+are left as future work.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+... (背景、动机、贡献列表占位：见 docs/ARXIV_OUTLINE.md)
+
+\section{Background and Related Work}
+\label{sec:bg}
+LWE/SIS 困难假设；Lyubashevsky Fiat--Shamir with Aborts 主线
+\cite{lyubashevsky2009fsa,lyubashevsky2012lswt}；NIST 标准 \cite{fips204,fips206}；
+近三年学术增量（HAETAE \cite{haetae2024}、G+G \cite{gg2023}、Rhyme
+\cite{rhyme2025}、search-LWE 紧归约 \cite{tightlwe2026}）；区块链 PQC 迁移
+评测口径 \cite{survey-pq-blockchain-2025,pq-transition-2026}；
+ML-DSA 基准方法学批评 \cite{mldsa-bench-2026}。
+
+\section{Constructions and Threat Models}
+\label{sec:constr}
+Track A（LWE 认证标签，MAC 语义）：$A=\text{Expand}(\mathrm{SHA256}(tx))$，
+$b=A s+e \bmod q$，$s\in\{-1,0,1\}^n$，验签 $\|b-As\|_\infty\le V$。
+Track B（公开可验证签名）：$pk=(A,T=A S)$，$S$ 短三元矩阵；签名
+$z=y+S c$，$c=H(tx\parallel w)$、$w=A y$，拒绝采样直到 $\|z\|_\infty\le \kappa-h$；
+验签 $H(tx\parallel A z - T c)=c$ 且 $z$ 短。
+语义边界：Track A 不是公钥签名；伪造 Track B 等价于找短 $S'$ 满足
+$A S'=T$（非齐次 SIS）。
+
+\section{Parameter Methodology (I1)}
+\label{sec:method}
+教学级 root-Hermite/core-SVP 估计器（与 lattice-estimator 的差异声明）；缩尺
+LLL 嵌入攻击协议。缩尺结果见 Figure~\ref{fig:n}：随 $n$ 增大，实测恢复成功率
+下降而估计安全级上升；Figure~\ref{fig:m}（左）更多历史样本使攻击更有利，（右）
+更大噪声使恢复更难。
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.8\linewidth]{v2_fig2_e3_nsweep.png}
+  \caption{成功率 vs $n$ 与估计 bit 安全级（q=257, $\sigma=5$ 缩尺）。
+  I1 交叉验证：趋势方向一致。}
+  \label{fig:n}
+\end{figure}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{v2_fig3_e3_msigma.png}
+  \caption{成功率 vs 历史样本数 $M$（左）与噪声 $\sigma$（右）。}
+  \label{fig:m}
+\end{figure}
+
+\section{Transaction-derived Matrix (I2)}
+\label{sec:i2}
+$A=\text{Expand}(\mathrm{SHA256}(tx))$：免传矩阵种子、杜绝跨交易结构化复用；
+安全性归约到带大量样本的搜索 LWE。边界：消息相关 $A$ 使对手可“挑”矩阵，
+需要额外的归约论证（未来工作）。
+
+\section{Benchmark (E2/E4)}
+\label{sec:bench}
+方法学对齐 \cite{mldsa-bench-2026}：固定消息集、报告分布。
+Table~\ref{tab:perf} 与 Figure~\ref{fig:perf}、\ref{fig:block} 汇总。
+
+\begin{table}[t]
+\centering
+\caption{尺寸与耗时（本机 CPU 实测；NIST 行为官方值，非本机）。}
+\label{tab:perf}
+\begin{tabular}{lccc}
+\toprule
+方案 & 公钥/私钥/签名(字节) & 签发中位(ms) & 验签中位(ms) \\
+\midrule
+Track A 标签 (对称) & -- / 144 / 288 & 2.45 & 0.100 \\
+Track B 签名 (ringless) & 229376 / 65536 / 544 & 1.31 & 0.155 \\
+RSA-3072-PSS (stdlib) & 384 / 384 / 384 & 63.2 & 0.307 \\
+ML-DSA-44 (官方) & 1312 / 2560 / 2420 & ref. & ref. \\
+FN-DSA-512 (官方) & 897 / 1281 / 666 & ref. & ref. \\
+ECDSA P-256 & 65 / 32 / 64 & ref. & ref. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{v2_fig5_timing.png}
+  \caption{签发耗时分位数与拒绝采样重试分布（Track B：median=6, max=57）。
+  只报均值会低估长尾。}
+  \label{fig:perf}
+\end{figure}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{v2_fig6_blockchain.png}
+  \caption{区块链记账膨胀与验签吞吐（1000 笔/块，64 B/笔）。}
+  \label{fig:block}
+\end{figure}
+
+\section{Discussion and Limitations}
+\label{sec:disc}
+尺寸/安全/吞吐三维权衡；ringless 公钥 ~224 KB 说明 module/ring 结构的必要性
+（ML-DSA pk 仅 1312 B）；教学级估计的局限（目标 $<$ GH 界时退化为维度上界）；
+不构成形式化证明。
+
+\section{Conclusion and Future Work}
+\label{sec:concl}
+正式 ROM/QROM 证明；module-LWE/SIS + NTT 实现；完整 lattice-estimator 复核；
+批量验签与门限签名（Ringtail 等）扩展。
+
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}
