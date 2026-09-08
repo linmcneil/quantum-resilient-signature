@@ -1,6 +1,7 @@
 # Quantum-Resilient Signature：基于 LWE 的格基认证与签名
 
 在线仓库：https://github.com/linmcneil/quantum-resilient-signature
+Zenodo 归档 DOI：https://doi.org/10.5281/zenodo.22659733
 
 这个项目的出发点是量子计算对 RSA/ECC 这类传统公钥密码的威胁：Shor 算法能在多项式
 时间内分解大整数、计算离散对数，一旦可扩展的量子计算机落地，RSA 基于整数分解的
