@@ -1,6 +1,6 @@
 {
-  "title": "Quantum-Resilient Signature: Reproducible Design-Space Study of Lightweight Lattice-Based Authentication and Signatures for Blockchain Transactions",
-  "description": "Reproducible experiments (Track A symmetric LWE tag; Track B Lyubashevsky-style public-key lattice signature), parameter-instantiation methodology (root-Hermite/core-SVP estimator + scaled-down LLL embedding attacks), benchmark aligned with 2025-2026 PQC evaluation methodology. Teaching-level security estimates; not formal proofs. See README and docs/METHODOLOGY.md.",
+  "title": "Quantum-Resilient Signature: Lightweight LWE-Based Authentication and Signatures for Blockchain Transactions",
+  "description": "Code and data behind an experimental comparison of two lightweight lattice-based designs for blockchain-style workloads. Track A is a symmetric LWE-based authentication tag whose matrix is derived from each transaction hash; Track B is a Lyubashevsky-style public-key lattice signature built with Fiat-Shamir with aborts. The repository contains correctness tests, timing comparisons against RSA-3072-PSS, scaled-down LLL embedding attacks used to cross-check the estimated security levels, a small blockchain workload simulation, and an independent cross-check against the community lattice-estimator. Security figures are parameter estimates for research prototypes, not formal proofs; details are in docs/ and the draft paper in paper/. Developed with AI-assisted coding and writing tools; all experiments, numbers, and conclusions were reviewed and verified by the author.",
   "creators": [
     {
       "name": "Lin, Zhiqian",
@@ -11,5 +11,11 @@
   "upload_type": "software",
   "license": "MIT",
   "access_right": "open",
-  "keywords": ["post-quantum cryptography", "LWE", "lattice signatures", "blockchain", "reproducibility"]
+  "keywords": [
+    "post-quantum cryptography",
+    "LWE",
+    "lattice signatures",
+    "blockchain",
+    "reproducibility"
+  ]
 }
