@@ -5,7 +5,7 @@
 
 ## 1. 一句话结论
 
-前沿 = **以 NIST 标准化的格签名（ML-DSA/FIPS 204、FN-DSA/FIPS 206）为工程基线**，
+前沿 = **以 NIST 标准化的格签名（ML-DSA/FIPS 204、FN-DSA/拟 FIPS 206）为工程基线**，
 学术上在 **Lyubashevsky “Fiat–Shamir with Aborts” 框架**上不断压缩签名尺寸、去掉拒绝采样，
 区块链落地研究关心的是**签名尺寸导致的交易膨胀与验证开销**。
 评测规范上，2026 年已出现专门论文批评“只报平均耗时”的做法——拒绝采样使签名耗时长尾分布，
@@ -16,8 +16,8 @@
 
 - 2009 Lyubashevsky, *Fiat-Shamir with Aborts*（Asiacrypt）——格签名基础框架。
 - 2012 *Lattice Signatures Without Trapdoors*——高斯拒绝采样、无陷门。
-- → CRYSTALS-Dilithium → **FIPS 204 (ML-DSA)**，NIST 于 2024-08-13 连同 FIPS 203 (ML-KEM)、FIPS 205 (SLH-DSA) 正式发布；**FIPS 206 (FN-DSA / Falcon)** 草案 2025、预计 2026 定稿。
-- 参考尺寸（NIST Ⅰ级）：ML-DSA-44 pk 1312 B / sk 2560 B / sig 2420 B；FN-DSA-512 pk 897 B / sig 666 B。
+- → CRYSTALS-Dilithium → **FIPS 204 (ML-DSA)**，NIST 于 2024-08-13 连同 FIPS 203 (ML-KEM)、FIPS 205 (SLH-DSA) 正式发布；**FN-DSA（FALCON 路线，拟 FIPS 206）** 2025-08 已提交标准草案审批，公开草案与定稿待发布（截至 2026-09 尚未公开）。
+- 参考尺寸（NIST Ⅰ级）：ML-DSA-44 pk 1312 B / sk 2560 B / sig 2420 B；FN-DSA-512 pk 897 B / sig 666 B（FALCON v1.2 / FN-DSA 草案值）。
 
 ### 最近 2–3 年的学术增量（“前沿在卷什么”）
 | 论文 | 年份/会议 | 贡献 |
@@ -67,7 +67,7 @@
 
 ## 7. 主要来源
 
-- FIPS 204/206：NIST 官网；ML-DSA / FN-DSA 尺寸表见 NIST 与多篇 2025–2026 基准论文。
+- FIPS 204：NIST 官网；FN-DSA-512 尺寸按 FALCON v1.2 规范（FIPS 206 尚未正式发布）。ML-DSA / FN-DSA 尺寸表另见多篇 2025–2026 基准论文。
 - ePrint 2025/1350（Rhyme）；ePrint 2026/953（Tight Signatures from Search LWE）；
   ePrint 2026/1333（ML-DSA 评测方法论）；CHES 2024 HAETAE；Asiacrypt 2023 G+G；
   CRYPTO 2025 Iterative Rejection Sampling（slides: iacr.org）。

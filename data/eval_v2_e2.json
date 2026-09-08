@@ -4210,11 +4210,11 @@
         "note": "尺寸为 FIPS 204 官方值"
       },
       "fn_dsa_512": {
-        "semantics": "FIPS 206 FN-DSA-512 / Falcon-512（NIST Ⅰ 级）",
+        "semantics": "FN-DSA-512（FALCON-based，FN-DSA 草案，拟 FIPS 206）",
         "pk_bytes": 897,
         "sk_bytes": 1281,
         "signature_bytes": 666,
-        "note": "尺寸为 FIPS 206 官方值"
+        "note": "尺寸为 FALCON v1.2 / FN-DSA 草案值（FIPS 206 尚未正式发布）"
       },
       "ecdsa_p256": {
         "semantics": "经典 ECDSA P-256（基线）",

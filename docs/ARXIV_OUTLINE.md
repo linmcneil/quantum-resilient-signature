@@ -17,21 +17,22 @@
    - 贡献列表（I1 方法论闭环 / I2 消息派生 / I3 开源基准）
 2. Background & Related Work
    - LWE/SIS、Fiat-Shamir with Aborts（Lyubashevsky 2009/2012）
-   - NIST 标准（ML-DSA/FN-DSA）与最新学术进展（HAETAE、Rhyme、search-LWE 紧归约）
+   - NIST 标准（ML-DSA；FN-DSA 拟 FIPS 206）与最新学术进展（HAETAE、Rhyme、search-LWE 紧归约）
    - 区块链 PQC 迁移综述（区块膨胀 10–30× 等口径）
 3. Threat Model 与语义边界（重要，防止审稿误解）
    - Track A = 对称认证标签（MAC 语义）——不能当公钥签名
    - Track B = 公开验证格签名（SIS 语义，ringless 教学原型）
    - 形式化安全为未来工作（不硬claim）
 4. Parameter Methodology (I1)
-   - root-Hermite/core-SVP 估计器（教学级，含与 lattice-estimator 的差异声明）
+   - root-Hermite/core-SVP 估计器（教学级）——lattice-estimator 交叉复核已量化差异：
+    n=144 参考估计 12–41 bits（教学 84.4 为饱和上界），推荐 n=480 达 ≈90 bits core-SVP
    - 缩尺 LLL/BKZ+Babai 交叉验证协议：成功率 vs n/M/σ，相变对照
 5. Transaction-derived Matrix (I2)
    - A = Expand(SHA-256(tx))：免传矩阵种子、防跨交易复用
    - 安全边界讨论：消息相关 A 的 adversary-chosen 问题（未来工作）
 6. Benchmark (E2/E4)
    - 方法学对齐 ePrint 2026/1333：分布而非均值；拒绝采样 WCET
-   - Track A/B、RSA-3072-PSS（本机）、ML-DSA-44/FN-DSA-512（官方值）
+   - Track A/B、RSA-3072-PSS（本机）、ML-DSA-44/FN-DSA-512（官方规格值，FN-DSA-512 按 FALCON v1.2）
    - 区块链区块膨胀与验签吞吐
 7. Results & Discussion
 8. Conclusion & Future Work

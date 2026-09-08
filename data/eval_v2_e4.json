@@ -46,7 +46,7 @@
       "note": "尺寸为官方值；验签耗时取文献数量级参考"
     },
     {
-      "scheme": "FN-DSA-512 (FIPS 206)",
+      "scheme": "FN-DSA-512 (FN-DSA draft/FALCON)",
       "per_tx_signature_bytes": 666,
       "block_signature_overhead_bytes": 666000,
       "block_payload_bytes": 64000,
@@ -55,7 +55,7 @@
       "sign_tps_median": 50000.0,
       "block_verify_ms_median": 80.0,
       "measured_on_this_machine": false,
-      "note": "尺寸为官方值；验签耗时取文献数量级参考"
+      "note": "尺寸为规格值（FN-DSA-512 按 FALCON v1.2/FN-DSA 草案）；验签耗时取文献数量级参考"
     },
     {
       "scheme": "ECDSA P-256",

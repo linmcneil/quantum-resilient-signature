@@ -9,3 +9,13 @@ build/
 # 实验输出：CSV 较大不入库，聚合 JSON 与图表入库
 data/*.csv
 
+
+# LaTeX 编译中间产物（保留 main.pdf 发行物，不入库中间文件）
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+
+# 参考文献原文仅供本地查阅（多为版权出版物），不入库
+paper/references_pdf/

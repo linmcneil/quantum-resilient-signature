@@ -33,13 +33,14 @@
   可达维度内（这是**教学标定**，不是生产参数）；
 - 教学级估计器（root-Hermite/core-SVP）用于**趋势对照**，不用于声称具体
   安全位；已知局限：目标向量低于 GH 界时估计退化为维度上界（无法区分 σ）。
-  正式参数必须用 lattice-estimator（primal/dual/BKZ 细化）复核——见论文
-  Discussion。
+  已用 lattice-estimator 完成 uSVP/BDD/core-SVP 复核（`scripts/crosscheck_lattice_estimator.py`、
+  `data/lattice_estimator_crosscheck.json`）：n=144 参考估计 12–41 bits（84.4 为饱和上界），
+  推荐 n=480 达 ≈90 bits core-SVP；默认 dual 家族与 Track B bit 级建模留作后续。
 
 ## 4. 区块链场景（E4）
 - 定义：单节点收 1000 笔/块、交易负载 64 B；记账开销 = 每笔签名/凭证字节；
   膨胀系数 = 记账开销 / 负载；验签 TPS = 1000 / 验签耗时中位数。
-- NIST 方案（ML-DSA-44/FN-DSA-512/ECDSA）只给出官方尺寸 + 文献数量级耗时，
+- NIST 方案（ML-DSA-44/FN-DSA-512/ECDSA）只给出官方规格尺寸（FN-DSA-512 按 FALCON v1.2 草案）+ 文献数量级耗时，
   明确标注“非本机实测”。
 
 ## 5. 复现性清单

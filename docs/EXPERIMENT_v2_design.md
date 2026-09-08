@@ -45,9 +45,9 @@ LLL/BKZ + Babai 攻击，实测“密钥恢复/伪造成功率 vs 参数”的�
 往返验证成功率；篡改检测率；**误拒率 vs 阈值 V 的 trade-off 曲线**（不是单点 0%/100%）。
 画法：x = V，双 y = 合法样本误拒率 / 篡改样本通过率，标出理论噪声界 ±B。
 
-### E2 同安全级性能对照（对标 ePrint 2026/1333 方法论）
+### E2 原型尺寸与耗时对照（对标 ePrint 2026/1333 方法论）
 方案：RSA-3072-PSS（标准库）、ML-DSA-44 与 FN-DSA-512（库可得则实测，否则尺寸表引用
-FIPS 204/206 官方值并注明）、本方案 Track A / Track B（estimator 定参后）。
+官方规格值并注明；FN-DSA-512 按 FALCON v1.2/FN-DSA 草案值，FIPS 206 尚未发布）、本方案 Track A / Track B（estimator 定参后）。
 指标：pk / sk / sig 字节数；keygen / sign / verify 耗时；
 **每方案 ≥1000 次**，报告 median / p50 / p90 / p99 / max；
 对含拒绝采样的方案额外报告**单次签名拒绝次数分布**（长尾/WCET）。

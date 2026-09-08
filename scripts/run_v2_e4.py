@@ -64,12 +64,12 @@ def main() -> None:
     # 官方参考尺寸 + 文献验签耗时（数量级，标注非本机）
     ref_verify_ms = {"ml_dsa_44": 0.05, "fn_dsa_512": 0.08, "ecdsa_p256": 0.01}
     for key, label in [("ml_dsa_44", "ML-DSA-44 (FIPS 204)"),
-                       ("fn_dsa_512", "FN-DSA-512 (FIPS 206)"),
+                       ("fn_dsa_512", "FN-DSA-512 (FN-DSA draft/FALCON)"),
                        ("ecdsa_p256", "ECDSA P-256")]:
         item = schemes["reference_nist"][key]
         row = scheme_row(label, item["signature_bytes"], ref_verify_ms[key], 0.02)
         row["measured_on_this_machine"] = False
-        row["note"] = "尺寸为官方值；验签耗时取文献数量级参考"
+        row["note"] = "尺寸为规格值（FN-DSA-512 按 FALCON v1.2/FN-DSA 草案）；验签耗时取文献数量级参考"
         rows.append(row)
 
     payload = {

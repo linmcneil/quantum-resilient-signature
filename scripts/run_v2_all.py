@@ -19,6 +19,7 @@ def run(script: str) -> None:
 
 def main() -> None:
     run("run_v2_e1.py")
+    run("run_v2_e1b.py")
     run("run_v2_e3.py")
     run("run_v2_e2.py")
     run("run_v2_e4.py")

@@ -1,0 +1,384 @@
+{
+  "tool": {
+    "name": "malb/lattice-estimator",
+    "repo": "https://github.com/malb/lattice-estimator",
+    "commit": "53da5982597709ba0fdf94ea37a84d822310fd84",
+    "usage_note": "estimator code executed unmodified; numeric Sage layer: real Sage or bundled sage_shim"
+  },
+  "cost_models": {
+    "default": "default reduction cost/shape models of lattice-estimator",
+    "rough": "ADPS16 core-SVP + GSA/LGSA, the literature-comparable model of estimate.rough"
+  },
+  "validation": {
+    "lwe_kyber512_usvp_default": {
+      "params": "Kyber512, LWE.primal_usvp (default RC)",
+      "expected": {
+        "rop_log2": 143.8,
+        "beta": 406,
+        "d": 998
+      },
+      "obtained": {
+        "rop_log2": 143.8,
+        "beta": 406,
+        "d": 998,
+        "delta": 1.003941190092091
+      },
+      "match": true
+    },
+    "lwe_kyber512_bdd_default": {
+      "params": "Kyber512, LWE.primal_bdd (default RC)",
+      "expected": {
+        "rop_log2": 140.2,
+        "beta": 389,
+        "d": 1005
+      },
+      "obtained": {
+        "rop_log2": 140.2,
+        "beta": 389,
+        "d": 1005,
+        "delta": null
+      },
+      "match": true
+    },
+    "lwe_kyber512_rough_usvp": {
+      "params": "Kyber512, LWE.estimate.rough usvp (ADPS16/GSA)",
+      "expected": {
+        "rop_log2": 118.6,
+        "beta": 406,
+        "d": 998
+      },
+      "obtained": {
+        "rop_log2": 118.6,
+        "beta": 406,
+        "d": 998,
+        "delta": 1.003941190092091
+      },
+      "match": true
+    },
+    "sis_dilithium2_rough_lattice": {
+      "params": "Dilithium2 MSIS, SIS.estimate.rough lattice",
+      "expected": {
+        "rop_log2": 123.5,
+        "beta": 423,
+        "d": 2303
+      },
+      "obtained": {
+        "rop_log2": 123.5,
+        "beta": 423,
+        "d": 2303
+      },
+      "match": true
+    }
+  },
+  "track_a": {
+    "q": 12289,
+    "sigma": 2.0,
+    "secret": "independent ternary, variance 2/3",
+    "n144_prototype": {
+      "usvp_default": {
+        "rop_log2": 41.3,
+        "beta": 41,
+        "d": 287,
+        "delta": 1.0125049178508143
+      },
+      "bdd_default": {
+        "rop_log2": 41.1,
+        "beta": 40,
+        "d": 270,
+        "delta": null
+      },
+      "rough_usvp": {
+        "rop_log2": 12.0,
+        "beta": 41,
+        "d": 287,
+        "delta": 1.0125049178508143
+      },
+      "rough_dual_hybrid": {
+        "rop_log2": 17.7,
+        "beta": 57,
+        "d": null,
+        "delta": null
+      }
+    },
+    "scan_usvp_default": {
+      "n_values": [
+        144,
+        160,
+        176,
+        192,
+        208,
+        224,
+        240,
+        256,
+        272,
+        288,
+        304,
+        320,
+        336,
+        352,
+        368,
+        384,
+        400,
+        416,
+        432,
+        448,
+        464,
+        480
+      ],
+      "rows": [
+        {
+          "rop_log2": 41.3,
+          "beta": 41,
+          "d": 287,
+          "delta": 1.0125049178508143
+        },
+        {
+          "rop_log2": 46.1,
+          "beta": 57,
+          "d": 312,
+          "delta": 1.011640333790518
+        },
+        {
+          "rop_log2": 49.8,
+          "beta": 70,
+          "d": 342,
+          "delta": 1.0108384911727801
+        },
+        {
+          "rop_log2": 53.3,
+          "beta": 82,
+          "d": 381,
+          "delta": 1.0101533145588664
+        },
+        {
+          "rop_log2": 56.9,
+          "beta": 95,
+          "d": 400,
+          "delta": 1.0094914907605503
+        },
+        {
+          "rop_log2": 60.3,
+          "beta": 107,
+          "d": 435,
+          "delta": 1.008951722908338
+        },
+        {
+          "rop_log2": 63.7,
+          "beta": 119,
+          "d": 472,
+          "delta": 1.008472241855117
+        },
+        {
+          "rop_log2": 67.3,
+          "beta": 132,
+          "d": 489,
+          "delta": 1.0080112632235232
+        },
+        {
+          "rop_log2": 70.7,
+          "beta": 144,
+          "d": 528,
+          "delta": 1.0076317659950054
+        },
+        {
+          "rop_log2": 74.3,
+          "beta": 157,
+          "d": 548,
+          "delta": 1.0072629966161497
+        },
+        {
+          "rop_log2": 77.7,
+          "beta": 169,
+          "d": 591,
+          "delta": 1.0069560748177107
+        },
+        {
+          "rop_log2": 81.3,
+          "beta": 182,
+          "d": 612,
+          "delta": 1.0066546766275446
+        },
+        {
+          "rop_log2": 85.0,
+          "beta": 195,
+          "d": 636,
+          "delta": 1.0063811857435547
+        },
+        {
+          "rop_log2": 88.4,
+          "beta": 207,
+          "d": 697,
+          "delta": 1.0061502280595565
+        },
+        {
+          "rop_log2": 92.0,
+          "beta": 220,
+          "d": 717,
+          "delta": 1.0059203566437356
+        },
+        {
+          "rop_log2": 95.6,
+          "beta": 233,
+          "d": 744,
+          "delta": 1.0057090568992033
+        },
+        {
+          "rop_log2": 99.3,
+          "beta": 246,
+          "d": 776,
+          "delta": 1.0055141005466173
+        },
+        {
+          "rop_log2": 103.1,
+          "beta": 260,
+          "d": 776,
+          "delta": 1.00532026983644
+        },
+        {
+          "rop_log2": 106.8,
+          "beta": 273,
+          "d": 808,
+          "delta": 1.005153556539385
+        },
+        {
+          "rop_log2": 110.4,
+          "beta": 286,
+          "d": 842,
+          "delta": 1.004998227728687
+        },
+        {
+          "rop_log2": 114.1,
+          "beta": 299,
+          "d": 879,
+          "delta": 1.0048531143420163
+        },
+        {
+          "rop_log2": 117.9,
+          "beta": 313,
+          "d": 889,
+          "delta": 1.004707104486506
+        }
+      ]
+    },
+    "scan_usvp_rough_adps16": {
+      "n_values": [
+        320,
+        400,
+        480,
+        560,
+        640,
+        720,
+        800,
+        880,
+        960,
+        1040
+      ],
+      "rows": [
+        {
+          "rop_log2": 53.1,
+          "beta": 182,
+          "d": 612,
+          "delta": 1.0066546766275446
+        },
+        {
+          "rop_log2": 71.8,
+          "beta": 246,
+          "d": 776,
+          "delta": 1.0055141005466173
+        },
+        {
+          "rop_log2": 91.4,
+          "beta": 313,
+          "d": 889,
+          "delta": 1.004707104486506
+        },
+        {
+          "rop_log2": 111.0,
+          "beta": 380,
+          "d": 1041,
+          "delta": 1.0041258211904749
+        },
+        {
+          "rop_log2": 130.8,
+          "beta": 448,
+          "d": 1208,
+          "delta": 1.0036791206911375
+        },
+        {
+          "rop_log2": 151.3,
+          "beta": 518,
+          "d": 1322,
+          "delta": 1.0033192040081842
+        },
+        {
+          "rop_log2": 171.7,
+          "beta": 588,
+          "d": 1474,
+          "delta": 1.0030298289565405
+        },
+        {
+          "rop_log2": 192.4,
+          "beta": 659,
+          "d": 1616,
+          "delta": 1.002788403860569
+        },
+        {
+          "rop_log2": 213.5,
+          "beta": 731,
+          "d": 1739,
+          "delta": 1.0025835531821625
+        },
+        {
+          "rop_log2": 234.5,
+          "beta": 803,
+          "d": 1890,
+          "delta": 1.002409526947942
+        }
+      ]
+    },
+    "recommended_n480": {
+      "usvp_default": {
+        "rop_log2": 117.9,
+        "beta": 313,
+        "d": 889,
+        "delta": 1.004707104486506
+      },
+      "bdd_default": {
+        "rop_log2": 114.8,
+        "beta": 298,
+        "d": 898,
+        "delta": null
+      },
+      "rough_usvp": {
+        "rop_log2": 91.4,
+        "beta": 313,
+        "d": 889,
+        "delta": 1.004707104486506
+      },
+      "rough_dual_hybrid": {
+        "rop_log2": 89.4,
+        "beta": 306,
+        "d": null,
+        "delta": null
+      }
+    }
+  },
+  "track_b": {
+    "instance": "homogeneous kernel of the public matrix A in Z_q^{224 x 256}; length bound = sqrt(256*2/3) ~ 13.06 (Euclidean norm of a ternary column)",
+    "homog_kernel_lattice": {
+      "rop_log2": Infinity,
+      "beta": 224,
+      "d": 224,
+      "raw": "rop: ≈2^inf, red: ≈2^inf, δ: 1.005853, β: 224, d: 224, tag: euclidean"
+    },
+    "two_signature_relation_bound": {
+      "value": 7912,
+      "comment": "infinity-norm MSIS estimator requires length_bound < (q-1)/2 = 6144; the two-signature collision vector may have coordinates up to 2*(kappa-h)=7848, above that bound, so the reference tool cannot model this instance directly."
+    }
+  },
+  "sysinfo": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10"
+  },
+  "note": "All rop_log2 rounded to 0.1 bit.  Default-model full 'dual' rows are not reported: that routine exercises success probabilities below the double range where only Sage's MPFR semantics apply; the conservative ADPS16 'rough' dual-hybrid row is reported instead."
+}
