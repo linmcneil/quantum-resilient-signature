@@ -1,0 +1,15 @@
+{
+  "title": "Quantum-Resilient Signature: Reproducible Design-Space Study of Lightweight Lattice-Based Authentication and Signatures for Blockchain Transactions",
+  "description": "Reproducible experiments (Track A symmetric LWE tag; Track B Lyubashevsky-style public-key lattice signature), parameter-instantiation methodology (root-Hermite/core-SVP estimator + scaled-down LLL embedding attacks), benchmark aligned with 2025-2026 PQC evaluation methodology. Teaching-level security estimates; not formal proofs. See README and docs/METHODOLOGY.md.",
+  "creators": [
+    {
+      "name": "Lin, Zhiqian",
+      "affiliation": "Dalian University of Technology",
+      "orcid": ""
+    }
+  ],
+  "upload_type": "software",
+  "license": "MIT",
+  "access_right": "open",
+  "keywords": ["post-quantum cryptography", "LWE", "lattice signatures", "blockchain", "reproducibility"]
+}

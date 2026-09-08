@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this repository in your research, please cite it."
+title: "Quantum-Resilient Signature / Lattice-Based Authentication and Signatures for Blockchain Transactions (v2 experiments)"
+authors:
+  - family-names: Lin
+    given-names: Zhiqian
+    email: lzq13332132680@163.com
+version: "1.0.0"
+date-released: 2026-09-08
+license: MIT
+url: "https://github.com/linmcneil/quantum-resilient-signature"
+keywords:
+  - post-quantum cryptography
+  - LWE
+  - lattice-based signatures
+  - blockchain
+  - reproducibility
