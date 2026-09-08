@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+.venv-cpu/
+*.egg-info/
+dist/
+build/
+
+# 实验输出：CSV 较大不入库，聚合 JSON 与图表入库
+data/*.csv
+

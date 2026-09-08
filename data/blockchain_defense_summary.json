@@ -1,0 +1,31 @@
+{
+  "attempts": 10000,
+  "seed": 42,
+  "attack_params": {
+    "lwe_queries": 8,
+    "rsa_bits": 1024,
+    "lwe": {
+      "n": 128,
+      "q": 12289,
+      "sigma": 2.0
+    }
+  },
+  "elapsed_sec": 360.2,
+  "schemes": {
+    "lwe": {
+      "forged": 0,
+      "attempts": 10000,
+      "defense_rate": 1.0
+    },
+    "rsa_raw": {
+      "forged": 10000,
+      "attempts": 10000,
+      "defense_rate": 0.0
+    },
+    "rsa_hash": {
+      "forged": 0,
+      "attempts": 10000,
+      "defense_rate": 1.0
+    }
+  }
+}
