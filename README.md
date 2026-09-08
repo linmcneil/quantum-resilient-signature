@@ -1,5 +1,7 @@
 # Quantum-Resilient Signature / LWE·格基认证与签名 · v2
 
+在线仓库：https://github.com/linmcneil/quantum-resilient-signature （MIT License，Zenodo DOI 待集成后回填）
+
 省级大创课题「RSA 加密算法的研究与改进」的**可复现实验库（v2）**。
 针对量子计算（Shor/格算法）对 RSA/ECC 的威胁，围绕“面向区块链交易的轻量格基
 认证与签名”给出：**两条方案线（Track A/B）、参数实例化方法学（I1）、交易派生
