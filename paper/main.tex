@@ -101,9 +101,9 @@ Table~\ref{tab:perf} 与 Figure~\ref{fig:perf}、\ref{fig:block} 汇总。
 \toprule
 方案 & 公钥/私钥/签名(字节) & 签发中位(ms) & 验签中位(ms) \\
 \midrule
-Track A 标签 (对称) & -- / 144 / 288 & 2.45 & 0.100 \\
-Track B 签名 (ringless) & 229376 / 65536 / 544 & 1.31 & 0.155 \\
-RSA-3072-PSS (stdlib) & 384 / 384 / 384 & 63.2 & 0.307 \\
+Track A tag (symmetric) & -- / 144 / 288 & 2.34 & 0.098 \\
+Track B signature (ringless) & 229376 / 65536 / 544 & 1.36 & 0.160 \\
+RSA-3072-PSS (OpenSSL 3.5.7) & 384 / 384 / 384 & 7.39 & 0.135 \\
 ML-DSA-44 (官方) & 1312 / 2560 / 2420 & ref. & ref. \\
 FN-DSA-512 (官方) & 897 / 1281 / 666 & ref. & ref. \\
 ECDSA P-256 & 65 / 32 / 64 & ref. & ref. \\
