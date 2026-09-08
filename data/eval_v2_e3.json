@@ -1,0 +1,337 @@
+{
+  "q": 257,
+  "sigma_default": 5.0,
+  "seed": 20260908,
+  "note": "缩尺小维度 LLL 嵌入攻击；q=257、σ≈5 使目标/GH 比接近 1，在小维度观察到相变，用于与估计器交叉验证（教学级）",
+  "sweep_a_n": [
+    {
+      "n": 5,
+      "rows": 5,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 12,
+      "success_rate": 0.8333333333333334,
+      "est_bits": 3.2,
+      "est_beta": 11,
+      "dim": 11
+    },
+    {
+      "n": 6,
+      "rows": 6,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 12,
+      "success_rate": 0.8333333333333334,
+      "est_bits": 3.8,
+      "est_beta": 13,
+      "dim": 13
+    },
+    {
+      "n": 7,
+      "rows": 7,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 12,
+      "success_rate": 1.0,
+      "est_bits": 4.4,
+      "est_beta": 15,
+      "dim": 15
+    },
+    {
+      "n": 8,
+      "rows": 8,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 12,
+      "success_rate": 0.9166666666666666,
+      "est_bits": 5.0,
+      "est_beta": 17,
+      "dim": 17
+    },
+    {
+      "n": 9,
+      "rows": 9,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 12,
+      "success_rate": 0.8333333333333334,
+      "est_bits": 5.5,
+      "est_beta": 19,
+      "dim": 19
+    },
+    {
+      "n": 10,
+      "rows": 10,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 12,
+      "success_rate": 0.75,
+      "est_bits": 6.1,
+      "est_beta": 21,
+      "dim": 21
+    },
+    {
+      "n": 11,
+      "rows": 11,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 12,
+      "success_rate": 0.8333333333333334,
+      "est_bits": 6.7,
+      "est_beta": 23,
+      "dim": 23
+    },
+    {
+      "n": 12,
+      "rows": 12,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 12,
+      "success_rate": 0.8333333333333334,
+      "est_bits": 7.3,
+      "est_beta": 25,
+      "dim": 25
+    },
+    {
+      "n": 13,
+      "rows": 13,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 12,
+      "success_rate": 0.3333333333333333,
+      "est_bits": 7.9,
+      "est_beta": 27,
+      "dim": 27
+    },
+    {
+      "n": 14,
+      "rows": 14,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 10,
+      "success_rate": 0.3,
+      "est_bits": 8.5,
+      "est_beta": 29,
+      "dim": 29
+    },
+    {
+      "n": 15,
+      "rows": 15,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 10,
+      "success_rate": 0.2,
+      "est_bits": 9.1,
+      "est_beta": 31,
+      "dim": 31
+    },
+    {
+      "n": 16,
+      "rows": 16,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 10,
+      "success_rate": 0.3,
+      "est_bits": 9.6,
+      "est_beta": 33,
+      "dim": 33
+    },
+    {
+      "n": 17,
+      "rows": 17,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 10,
+      "success_rate": 0.0,
+      "est_bits": 10.2,
+      "est_beta": 35,
+      "dim": 35
+    },
+    {
+      "n": 18,
+      "rows": 18,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 10,
+      "success_rate": 0.3,
+      "est_bits": 10.8,
+      "est_beta": 37,
+      "dim": 37
+    },
+    {
+      "n": 19,
+      "rows": 19,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 10,
+      "success_rate": 0.0,
+      "est_bits": 11.4,
+      "est_beta": 39,
+      "dim": 39
+    },
+    {
+      "n": 20,
+      "rows": 20,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 10,
+      "success_rate": 0.1,
+      "est_bits": 12.0,
+      "est_beta": 41,
+      "dim": 41
+    }
+  ],
+  "sweep_b_samples": [
+    {
+      "n": 6,
+      "rows": 6,
+      "m_transactions": 1,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 8,
+      "success_rate": 0.75,
+      "est_bits": 3.8,
+      "est_beta": 13,
+      "dim": 13
+    },
+    {
+      "n": 6,
+      "rows": 12,
+      "m_transactions": 2,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 8,
+      "success_rate": 1.0,
+      "est_bits": 5.5,
+      "est_beta": 19,
+      "dim": 19
+    },
+    {
+      "n": 6,
+      "rows": 18,
+      "m_transactions": 3,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 8,
+      "success_rate": 1.0,
+      "est_bits": 7.3,
+      "est_beta": 25,
+      "dim": 25
+    },
+    {
+      "n": 6,
+      "rows": 24,
+      "m_transactions": 4,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 8,
+      "success_rate": 1.0,
+      "est_bits": 9.1,
+      "est_beta": 31,
+      "dim": 31
+    },
+    {
+      "n": 6,
+      "rows": 30,
+      "m_transactions": 5,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 8,
+      "success_rate": 1.0,
+      "est_bits": 10.8,
+      "est_beta": 37,
+      "dim": 37
+    },
+    {
+      "n": 6,
+      "rows": 36,
+      "m_transactions": 6,
+      "q": 257,
+      "sigma": 5.0,
+      "trials": 8,
+      "success_rate": 1.0,
+      "est_bits": 12.6,
+      "est_beta": 43,
+      "dim": 43
+    }
+  ],
+  "sweep_c_sigma": [
+    {
+      "sigma": 1.0,
+      "tail": 4,
+      "n": 12,
+      "rows": 12,
+      "q": 257,
+      "trials": 10,
+      "success_rate": 1.0,
+      "est_bits": 7.3,
+      "est_beta": 25
+    },
+    {
+      "sigma": 2.0,
+      "tail": 6,
+      "n": 12,
+      "rows": 12,
+      "q": 257,
+      "trials": 10,
+      "success_rate": 1.0,
+      "est_bits": 7.3,
+      "est_beta": 25
+    },
+    {
+      "sigma": 3.0,
+      "tail": 10,
+      "n": 12,
+      "rows": 12,
+      "q": 257,
+      "trials": 10,
+      "success_rate": 1.0,
+      "est_bits": 7.3,
+      "est_beta": 25
+    },
+    {
+      "sigma": 4.0,
+      "tail": 12,
+      "n": 12,
+      "rows": 12,
+      "q": 257,
+      "trials": 10,
+      "success_rate": 0.7,
+      "est_bits": 7.3,
+      "est_beta": 25
+    },
+    {
+      "sigma": 5.0,
+      "tail": 16,
+      "n": 12,
+      "rows": 12,
+      "q": 257,
+      "trials": 10,
+      "success_rate": 0.6,
+      "est_bits": 7.3,
+      "est_beta": 25
+    },
+    {
+      "sigma": 6.0,
+      "tail": 18,
+      "n": 12,
+      "rows": 12,
+      "q": 257,
+      "trials": 10,
+      "success_rate": 0.2,
+      "est_bits": 7.3,
+      "est_beta": 25
+    },
+    {
+      "sigma": 7.0,
+      "tail": 22,
+      "n": 12,
+      "rows": 12,
+      "q": 257,
+      "trials": 10,
+      "success_rate": 0.1,
+      "est_bits": 7.3,
+      "est_beta": 25
+    }
+  ]
+}

@@ -1,77 +1,124 @@
-# Quantum-Resilient Signature：抗量子 LWE 认证凭证 vs RSA 基线
+# Quantum-Resilient Signature / LWE·格基认证与签名 · v2
 
-省级大创课题「RSA 加密算法的研究与改进」的**可复现实验代码库**。
-针对量子计算（Shor 算法）对 RSA/ECC 类代数结构的威胁，实现并量化评测一种
-**基于 LWE（带误差学习）的轻量级认证凭证方案**，并与教科书 RSA 基线对照。
+省级大创课题「RSA 加密算法的研究与改进」的**可复现实验库（v2）**。
+针对量子计算（Shor/格算法）对 RSA/ECC 的威胁，围绕“面向区块链交易的轻量格基
+认证与签名”给出：**两条方案线（Track A/B）、参数实例化方法学（I1）、交易派生
+矩阵变体（I2）以及一套对齐 2025–2026 学界规范的评测（E1–E4）**。
 
-> 安全声明：本仓库为**研究与教学用途的模拟/原型实现**，不是生产级密码库。
-> “防护成功率”均指在**本文明确定义的攻击模型与预算**下的实验结果，
-> 不构成形式化安全证明；专利交底书引用的历史数字请以本仓库可复现实验为准，
-> 由发明人核对口径后再引用。
+> 语义声明（重要，防止误解）：
+> - **Track A 是对称认证标签（MAC 语义）**，不是公钥签名。验签需要共享私钥 s，
+>   对应《技术交底书》`b = A·s + e` 的“一事一密”思想。
+> - **Track B 是公开可验证格签名原型**（Lyubashevsky Fiat–Shamir with Aborts 的
+>   ringless 教学实现），安全基于（非齐次）SIS。
+> - 全部安全性结论为**教学级估计 + 缩尺实验**，不构成形式化证明；正式使用前
+>   需用 lattice-estimator 复核并用 module/ring 结构重构（见下）。
+> - 仓库内不再出现“LWE 100% vs RSA 0%”这类打稻草人的对比口径（v1 遗留口径已废弃，
+>   见 [V1 说明](#v1-legacy)）。
 
-## 1. 方案（对应《技术交底书》）
+## 1. 方案与创新点
 
-- 参数：格维度 n=128，模数 q=12289，私钥 s ∈ {-1,0,1}^n（短向量）；
-- 签名：SHA-256(tx) → 随机种子 → 矩阵 A（一事一密），b = A·s + e (mod q)，
-  e ~ 截断离散高斯（σ=2）；
-- 验签：持钥方验证 ‖b - A·s‖_∞ <= V（V=8）。
-- 关键设计：A 由交易逐笔生成、密钥为短向量、噪声掩盖密钥，
-  不再依赖大整数分解，规避 Shor 算法所需的代数周期性。
-
-## 2. 威胁模型与实验设计
-
-统一使用“自适应选择消息预言机 + 有界查询预算”的攻击模型：
-攻击者可以索取若干历史样本，但**无法获得私钥 s**，目标是对一笔**新交易**
-伪造能通过验证的凭证。
-
-| 方案 | 攻击实现 | 预期 |
+| 编号 | 内容 | 状态 |
 | --- | --- | --- |
-| LWE（本方案） | 有界历史样本 + 最小二乘/舍入恢复 s | 无 s 时无法构造合法凭证 |
-| RSA raw（教科书） | 乘法同态存在性伪造（2 次选择消息） | 可被任意伪造 |
-| RSA + SHA-256（对照） | 同种乘法伪造（被哈希破坏） | 该攻击下安全（注：仍受分解威胁） |
+| Track A | LWE 认证标签：A=SHA-256(tx) 逐笔派生（一事一密），b=A·s+e，阈值校验 | ✅ 已实现 |
+| Track B | 公开可验证格签名：pk=(A,T=A·S)，拒绝采样使 z 在盒内均匀（传输不泄露 S） | ✅ 已实现 |
+| I1 | 参数方法学：root-Hermite/core-SVP 估计器定参 + 缩尺 LLL 嵌入攻击交叉验证相变 | ✅ 已实现 |
+| I2 | 交易派生矩阵：A=Expand(SHA-256(tx)) 免传矩阵种子/防跨交易复用 | ✅ 已在 Track A 使用，边界见文末 |
+| I3 | 可复现评测：全部 JSON 入 `data/`，图表入 `docs/figures_v2/`，一键复现 | ✅ 已实现 |
 
-实验脚本与《技术交底书》中的 `__init__ / sign_transaction /
-run_blockchain_defense_test / blockchain_defense_data.csv` 一一对应。
-
-## 3. 快速开始
+## 2. 快速开始
 
 ```bash
-pip install -r requirements.txt
+python -m pip install numpy matplotlib        # 其余只用标准库
 
-# 防御成功率实验（N=10000，默认与交底书口径对齐）
-python scripts/run_eval.py --attempts 10000 --seed 42 --out-dir data
+python scripts/run_v2_e1.py      # E1 正确性与阈值曲线
+python scripts/run_v2_e3.py      # E3 缩尺格攻击（相变）
+python scripts/run_v2_e2.py      # E2 同安全级性能对照（首次会生成 RSA-3072 密钥并缓存）
+python scripts/run_v2_e4.py      # E4 区块链场景（膨胀/TPS）
+python scripts/make_figures_v2.py
 
-# 生成全套图表（docs/figures/）
-python scripts/make_figures.py
+# 或一键全部：
+python scripts/run_v2_all.py
 
-# 单测
-python tests/test_core.py
+# 单测（纯功能，几秒）
+python tests/test_v2_core.py
+python tests/test_core.py        # v1 遗留单测
 ```
 
-## 4. 结果（2026-09-08，N=10000 / 方案，seed=42）
+## 3. 关键结果（2026-09-08，本机 CPU 实测）
 
-| 方案 | 伪造成功 | 防护成功率 |
-| --- | --- | --- |
-| LWE（本方案） | 0 / 10000 | 100.00% |
-| RSA raw（教科书） | 10000 / 10000 | 0.00% |
-| RSA + SHA-256（对照） | 0 / 10000 | 100.00% |
+### E1 正确性（Track A，n=144/q=12289/σ=2，估计 ~84 bits 教学级）
+合法接受率 **1.0000**；篡改检出率 **1.0000**；盲猜凭证拒绝率 **1.0000**。
+误拒率/篡改放行率随阈值 V 的权衡曲线见 `v2_fig1`。
 
-延迟与参数敏感性见 `docs/figures/`。
+### E3 缩尺攻击（I1 交叉验证，q=257）
+| 实验 | 结论 |
+| --- | --- |
+| n 扫描（σ=5） | 恢复成功率 ~0.9（n≤10）→ ~0.3（n≈14）→ ~0.1（n≥19）；估计 bit 安全级同步上升 |
+| M 扫描（n=6） | 1 笔样本 ~0.75 → 3–6 笔样本 1.00：**样本越多攻击越有利** |
+| σ 扫描（n=12） | σ=1–3 全成功 → σ=7 仅 ~0.1：**噪声越大越难恢复** |
 
-## 5. 图表（数形结合）
+注：教学级估计器在“目标 < GH 界”区退化为维度上界，无法区分 σ——这是简化的已知局限，
+完整 lattice-estimator 分析列为 future work（图注已注明）。
 
-| 图 | 内容 | 文件 |
-| --- | --- | --- |
-| 图 0 | 方案流程 | docs/figures/fig0_scheme_overview.png |
-| 图 1 | 三种方案防御成功率 | docs/figures/fig1_defense_rate.png |
-| 图 2 | 验证残差分布与阈值 V、检出率 | docs/figures/fig2_verify_residuals.png |
-| 图 3 | 成功率随尝试次数的稳定性 | docs/figures/fig3_running_defense.png |
-| 图 4 | 攻击预算 M vs 伪造成功率 | docs/figures/fig4_attack_budget_sweep.png |
-| 图 5 | 签名/验签延迟对比 | docs/figures/fig5_latency.png |
+### E2 性能对照（同一机器；NIST 项为官方尺寸，非本机）
+| 方案 | pk / sk / 签名(字节) | 签发中位(ms) | p99(ms) | 验签中位(ms) |
+| --- | --- | --- | --- | --- |
+| Track A LWE 标签(对称) | – / 144 / 288 | 2.27 | 4.12 | 0.094 |
+| Track B 格签名(ringless) | 229376 / 65536 / 544 | 1.22 | 8.69 | 0.152 |
+| RSA-3072-PSS（纯 stdlib 实测） | 384 / 384 / 384 | 59.95 | 59.95 | 0.300 |
+| ML-DSA-44 (FIPS 204 官方) | 1312 / 2560 / 2420 | 参考 | 参考 | 参考 |
+| FN-DSA-512 (FIPS 206 官方) | 897 / 1281 / 666 | 参考 | 参考 | 参考 |
 
-## 6. 局限与路线
+要点：
+- Track B 签名**拒绝次数** 中位 6、p99=40、max=57 → 拒绝采样带来显著长尾，
+  只报均值会误导（对齐 ePrint 2026/1333 的批评）。见 `v2_fig5`。
+- Track B ringless 公钥 ~224 KB ≫ ML-DSA 1312 B：这是“为什么正式方案需要
+  module/ring 结构”的直接工程证据（NTT/环结构把公钥压缩三个数量级）。
 
-- 攻击面为“线性/舍入恢复 + 存在性伪造”，尚未实现 LLL/BKZ 格基规约攻击与
-  基于 Shor 的因数分解模拟；参数安全性需要独立分析（n/q/σ 与错误率关系）；
-- 待办：LLL/BKZ 攻击模块与参数敏感度曲线、真实 RSA-PSS 对照、
-  实验图表中文化/导出 EPS、GitHub Actions CI 与开源发布。
+### E4 区块链场景（1000 笔/块，负载 64 B/笔）
+| 方案 | 每笔记账字节 | 区块膨胀 | 验签 TPS(估) |
+| --- | --- | --- | --- |
+| Track A 标签 | 288 | 4.5× | ~1.1 万 |
+| Track B 签名 | 544 | 8.5× | ~6.6 千 |
+| RSA-3072-PSS | 384 | 6.0× | ~3.3 千 |
+| ML-DSA-44（官方尺寸+文献耗时） | 2420 | 37.8× | ~2.0 万 |
+| FN-DSA-512 | 666 | 10.4× | ~1.25 万 |
+| ECDSA P-256（基线） | 64 | 1.0× | ~10 万 |
+
+格签名/标签在“吞吐可接受、但交易膨胀明显”的区间——与 2025–2026 区块链 PQC 迁移
+综述（10–30× 量级）一致，说明落地关键是签名尺寸与批量验签。
+
+## 4. 图表（docs/figures_v2/）
+
+| 图 | 内容 |
+| --- | --- |
+| v2_fig0 | Track A / Track B 方案流程示意 |
+| v2_fig1 | 残差分布 + 误拒/篡改放行 vs 阈值 V |
+| v2_fig2 | E3：成功率 vs n 与估计 bit 安全级（I1 交叉验证） |
+| v2_fig3 | E3：成功率 vs 样本数 M / vs 噪声 σ |
+| v2_fig4 | 尺寸对照（pk/sk/签名，log 轴） |
+| v2_fig5 | 签名耗时 ECDF + 拒绝次数分布（WCET） |
+| v2_fig6 | 区块链区块膨胀 + 验签 TPS |
+
+## 5. 目录结构
+
+```
+qrsv2/            # v2 核心（params/estimator/tag/signature/lattices/rsa_pss/expand）
+scripts/          # run_v2_e1..e4、make_figures_v2、run_v2_all
+tests/test_v2_core.py
+data/eval_v2_e1..e4.json
+docs/             # LITERATURE_REVIEW、EXPERIMENT_v2_design、REPORT_v2、ARXIV_OUTLINE
+docs/figures_v2/
+qrs/              # v1 遗留（已冻结）
+```
+
+## 6. 已知边界与未来工作
+- 形式化安全证明（ROM/QROM、SIS/LWE 归约）——教学实现未覆盖；
+- 用 module/ring 结构 + NTT 重构 Track B，解决公钥尺寸问题；
+- I2 消息派生矩阵会让 A 随被签消息被对手“挑”，需额外的归约论证；
+- 完整 lattice-estimator（primal/dual、BKZ-β 预估）复核正式参数。
+
+## 7. V1 legacy
+`qrs/`、`scripts/run_eval.py`、`docs/EXPERIMENT.md` 等 v1 内容为历史存档，保留仅为
+可追溯性。其“LWE 100% vs RSA 0%”的防御率口径存在“不同攻击语义对比”的缺陷，已被
+本 v2 取代，**不再作为结论引用**。

@@ -1,0 +1,201 @@
+{
+  "machine": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10"
+  },
+  "methodology": "报 mean/median/p90/p99/max；Track B 额外报拒绝次数分布，对齐 ePrint 2026/1333 对 ML-DSA 评测的批评",
+  "schemes": {
+    "track_a_lwe_tag": {
+      "semantics": "对称 LWE 认证标签（MAC，对应技术交底书）",
+      "params": {
+        "n": 144,
+        "m": 144,
+        "q": 12289,
+        "sigma": 2.0,
+        "tail": 6,
+        "V": 8,
+        "est_bits": 84.4,
+        "beta": 289
+      },
+      "sk_bytes": 144,
+      "credential_bytes": 288,
+      "keygen_once_ms": 2431.958,
+      "sign_ms": {
+        "n": 1000,
+        "mean_ms": 2.4085,
+        "median_ms": 2.2733,
+        "p90_ms": 2.7705,
+        "p99_ms": 4.1194,
+        "max_ms": 6.3376,
+        "min_ms": 2.0928
+      },
+      "verify_ms": {
+        "n": 1000,
+        "mean_ms": 0.1,
+        "median_ms": 0.0936,
+        "p90_ms": 0.1117,
+        "p99_ms": 0.1754,
+        "max_ms": 0.331,
+        "min_ms": 0.0894
+      },
+      "reject_tries": null
+    },
+    "track_b_lwe_sig": {
+      "semantics": "Lyubashevsky FS-with-Aborts 格签名原型（ringless，SIS）",
+      "params": {
+        "n_rows": 224,
+        "n_dim": 256,
+        "q": 12289,
+        "h": 32,
+        "m_ch": 256,
+        "kappa": 3956,
+        "accept_bound": 3924,
+        "secret_p": 0.6666666666666666,
+        "sis_gap_db": -30.5,
+        "sis_note": "gap_db<0: 目标比 GH 短，落在 SIS 困难区（需格基约化）",
+        "challenge_log2": 167.4,
+        "accept_p_design": 0.125,
+        "note": "教学级估计；正式发布前需用 lattice-estimator 复核 primal/dual"
+      },
+      "pk_bytes": 229376,
+      "sk_bytes": 65536,
+      "signature_bytes": 544,
+      "keygen_once_ms": 0.729,
+      "sign_ms": {
+        "n": 1000,
+        "mean_ms": 1.7582,
+        "median_ms": 1.2245,
+        "p90_ms": 3.9042,
+        "p99_ms": 8.6904,
+        "max_ms": 11.6224,
+        "min_ms": 0.1785
+      },
+      "verify_ms": {
+        "n": 1000,
+        "mean_ms": 0.1652,
+        "median_ms": 0.1518,
+        "p90_ms": 0.1928,
+        "p99_ms": 0.3247,
+        "max_ms": 0.6277,
+        "min_ms": 0.1441
+      },
+      "reject_tries": {
+        "mean": 8.329,
+        "median": 6,
+        "p90": 19,
+        "p99": 40,
+        "max": 57,
+        "hist": [
+          0,
+          120,
+          109,
+          96,
+          81,
+          67,
+          73,
+          62,
+          52,
+          35,
+          36,
+          37,
+          24,
+          23,
+          20,
+          20,
+          11,
+          16,
+          14,
+          16,
+          9,
+          5,
+          11,
+          7,
+          6,
+          5,
+          3,
+          5,
+          9,
+          4,
+          3,
+          2,
+          4,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          0,
+          2,
+          0,
+          1,
+          0,
+          1,
+          1,
+          0,
+          2,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1
+        ]
+      }
+    },
+    "rsa3072_pss": {
+      "semantics": "RSA-3072 + PSS-SHA256（纯标准库实现，本机实测）",
+      "pk_bytes": 384,
+      "sk_bytes": 384,
+      "signature_bytes": 384,
+      "keygen_once_ms": null,
+      "sign_ms": {
+        "n": 400,
+        "mean_ms": 59.9517,
+        "median_ms": 59.9517,
+        "p90_ms": 59.9517,
+        "p99_ms": 59.9517,
+        "max_ms": 59.9517,
+        "min_ms": 59.9517
+      },
+      "verify_ms": {
+        "n": 400,
+        "mean_ms": 0.3046,
+        "median_ms": 0.2998,
+        "p90_ms": 0.326,
+        "p99_ms": 0.4386,
+        "max_ms": 0.7335,
+        "min_ms": 0.2618
+      },
+      "reject_tries": null,
+      "note": "RSA-3072 ≈ 128-bit 经典安全（量子迁移基线对照）"
+    },
+    "reference_nist": {
+      "ml_dsa_44": {
+        "semantics": "FIPS 204 ML-DSA-44（NIST Ⅰ 级，Module-LWE+SIS）",
+        "pk_bytes": 1312,
+        "sk_bytes": 2560,
+        "signature_bytes": 2420,
+        "note": "尺寸为 FIPS 204 官方值；耗时见文献基准（非本机实测）"
+      },
+      "fn_dsa_512": {
+        "semantics": "FIPS 206 FN-DSA-512 / Falcon-512（NIST Ⅰ 级）",
+        "pk_bytes": 897,
+        "sk_bytes": 1281,
+        "signature_bytes": 666,
+        "note": "尺寸为 FIPS 206 官方值；耗时见文献基准（非本机实测）"
+      },
+      "ecdsa_p256": {
+        "semantics": "经典 ECDSA P-256（将被替换的基线）",
+        "pk_bytes": 65,
+        "sk_bytes": 32,
+        "signature_bytes": 64,
+        "note": "经典安全 ~128-bit，不抗量子"
+      }
+    }
+  }
+}

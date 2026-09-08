@@ -1,0 +1,73 @@
+{
+  "n_tx": 1000,
+  "tx_payload_bytes": 64,
+  "scenario": "单节点收块逐笔验签（教学模拟）",
+  "rows": [
+    {
+      "scheme": "LWE 认证标签 A",
+      "per_tx_signature_bytes": 288,
+      "block_signature_overhead_bytes": 288000,
+      "block_payload_bytes": 64000,
+      "inflation_vs_payload": 4.5,
+      "verify_tps_median": 10684.0,
+      "sign_tps_median": 440.0,
+      "block_verify_ms_median": 93.6
+    },
+    {
+      "scheme": "LWE 格签名 B",
+      "per_tx_signature_bytes": 544,
+      "block_signature_overhead_bytes": 544000,
+      "block_payload_bytes": 64000,
+      "inflation_vs_payload": 8.5,
+      "verify_tps_median": 6588.0,
+      "sign_tps_median": 817.0,
+      "block_verify_ms_median": 151.8
+    },
+    {
+      "scheme": "RSA-3072-PSS",
+      "per_tx_signature_bytes": 384,
+      "block_signature_overhead_bytes": 384000,
+      "block_payload_bytes": 64000,
+      "inflation_vs_payload": 6.0,
+      "verify_tps_median": 3336.0,
+      "sign_tps_median": 17.0,
+      "block_verify_ms_median": 299.8
+    },
+    {
+      "scheme": "ML-DSA-44 (FIPS 204)",
+      "per_tx_signature_bytes": 2420,
+      "block_signature_overhead_bytes": 2420000,
+      "block_payload_bytes": 64000,
+      "inflation_vs_payload": 37.8,
+      "verify_tps_median": 20000.0,
+      "sign_tps_median": 50000.0,
+      "block_verify_ms_median": 50.0,
+      "measured_on_this_machine": false,
+      "note": "尺寸为官方值；验签耗时取文献数量级参考"
+    },
+    {
+      "scheme": "FN-DSA-512 (FIPS 206)",
+      "per_tx_signature_bytes": 666,
+      "block_signature_overhead_bytes": 666000,
+      "block_payload_bytes": 64000,
+      "inflation_vs_payload": 10.4,
+      "verify_tps_median": 12500.0,
+      "sign_tps_median": 50000.0,
+      "block_verify_ms_median": 80.0,
+      "measured_on_this_machine": false,
+      "note": "尺寸为官方值；验签耗时取文献数量级参考"
+    },
+    {
+      "scheme": "ECDSA P-256",
+      "per_tx_signature_bytes": 64,
+      "block_signature_overhead_bytes": 64000,
+      "block_payload_bytes": 64000,
+      "inflation_vs_payload": 1.0,
+      "verify_tps_median": 100000.0,
+      "sign_tps_median": 50000.0,
+      "block_verify_ms_median": 10.0,
+      "measured_on_this_machine": false,
+      "note": "尺寸为官方值；验签耗时取文献数量级参考"
+    }
+  ]
+}
