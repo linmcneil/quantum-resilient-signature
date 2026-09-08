@@ -9,9 +9,9 @@
       "block_signature_overhead_bytes": 288000,
       "block_payload_bytes": 64000,
       "inflation_vs_payload": 4.5,
-      "verify_tps_median": 10684.0,
-      "sign_tps_median": 440.0,
-      "block_verify_ms_median": 93.6
+      "verify_tps_median": 9970.0,
+      "sign_tps_median": 409.0,
+      "block_verify_ms_median": 100.3
     },
     {
       "scheme": "LWE 格签名 B",
@@ -19,9 +19,9 @@
       "block_signature_overhead_bytes": 544000,
       "block_payload_bytes": 64000,
       "inflation_vs_payload": 8.5,
-      "verify_tps_median": 6588.0,
-      "sign_tps_median": 817.0,
-      "block_verify_ms_median": 151.8
+      "verify_tps_median": 6443.0,
+      "sign_tps_median": 763.0,
+      "block_verify_ms_median": 155.2
     },
     {
       "scheme": "RSA-3072-PSS",
@@ -29,9 +29,9 @@
       "block_signature_overhead_bytes": 384000,
       "block_payload_bytes": 64000,
       "inflation_vs_payload": 6.0,
-      "verify_tps_median": 3336.0,
-      "sign_tps_median": 17.0,
-      "block_verify_ms_median": 299.8
+      "verify_tps_median": 3259.0,
+      "sign_tps_median": 16.0,
+      "block_verify_ms_median": 306.8
     },
     {
       "scheme": "ML-DSA-44 (FIPS 204)",

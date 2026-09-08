@@ -19,10 +19,10 @@
 
 ## E2 · 性能对照
 方法学对齐 ePrint 2026/1333：固定消息集、≥600 次、报 median/p90/p99/max。
-- Track A：签发 med 2.27 ms / p99 4.12；验签 med 0.094 ms；凭证 288 B。
-- Track B：签发 med 1.22 ms / p99 8.69（拒绝采样长尾）；验签 med 0.152 ms；签名 544 B；
+- Track A：签发 med 2.45 ms / p99 4.50；验签 med 0.100 ms；凭证 288 B。
+- Track B：签发 med 1.31 ms / p99 9.14（拒绝采样长尾）；验签 med 0.155 ms；签名 544 B；
   拒绝次数 med 6 / p99 40 / max 57。
-- RSA-3072-PSS（纯标准库，本机）：签名 med 59.95 ms；验签 med 0.30 ms；签名 384 B。
+- RSA-3072-PSS（纯标准库，本机）：签名 med 63.19 ms；验签 med 0.31 ms；签名 384 B。
 - ML-DSA-44 / FN-DSA-512 / ECDSA：官方尺寸表（非本机实测）。
 机器信息记录于 eval_v2_e2.json["machine"]。
 
