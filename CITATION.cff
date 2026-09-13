@@ -16,3 +16,16 @@ keywords:
   - lattice-based signatures
   - blockchain
   - reproducibility
+preferred-citation:
+  type: generic
+  title: 'Reproducible Design-Space Study of Lightweight Lattice-Based Authentication and Signatures for Blockchain Transactions'
+  authors:
+    - family-names: Lin
+      given-names: Zhiqian
+  year: 2026
+  month: 9
+  status: preprint
+  collection-title: 'Cryptology ePrint Archive'
+  number: 1925
+  url: 'https://eprint.iacr.org/2026/1925'
+  notes: 'Sole-author preprint. Code and data archive: https://doi.org/10.5281/zenodo.22659733'

@@ -1,5 +1,11 @@
 # v2 arXiv 论文大纲（M5，草稿定位：技术报告 / 复现性研究）
 
+> **状态更新（2026-09-13）**：论文已按此大纲完成，**未投 arXiv**，而是作为独立作者预印本公开发表于
+> IACR Cryptology ePrint Archive：*Reproducible Design-Space Study of Lightweight Lattice-Based
+> Authentication and Signatures for Blockchain Transactions*, Paper 2026/1925, Sep 2026 —
+> https://eprint.iacr.org/2026/1925 。本文件保留作为写作过程的记录，下面「提交动作（需要用户）」
+> 一节中与 arXiv 相关的条目已作废。
+
 > 定位声明（写在论文开头）：本文**不是**声称提出“可证明安全的新签名”；
 > 而是给出一个可复现的实验框架，研究“面向区块链交易的轻量格基
 > 认证/签名设计空间”——含参数实例化方法学（I1）、交易派生矩阵

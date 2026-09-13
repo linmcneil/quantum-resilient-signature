@@ -1,7 +1,11 @@
 # Quantum-Resilient Signature：基于 LWE 的格基认证与签名
 
+**论文（独立作者预印本）**：Zhiqian Lin. *Reproducible Design-Space Study of Lightweight Lattice-Based
+Authentication and Signatures for Blockchain Transactions*. Cryptology ePrint Archive,
+Paper 2026/1925, Sep 2026. https://eprint.iacr.org/2026/1925
+
 在线仓库：https://github.com/linmcneil/quantum-resilient-signature
-Zenodo 归档 DOI：https://doi.org/10.5281/zenodo.22659733
+Zenodo 归档（代码与数据）DOI：https://doi.org/10.5281/zenodo.22659733
 
 这个项目的出发点是量子计算对 RSA/ECC 这类传统公钥密码的威胁：Shor 算法能在多项式
 时间内分解大整数、计算离散对数，一旦可扩展的量子计算机落地，RSA 基于整数分解的
@@ -93,6 +97,26 @@ qrs/      v1 遗留（已冻结）
 
 `qrs/`、`docs/EXPERIMENT.md` 是第一版存档。v1 用“LWE 100% vs RSA 0%”的防御率做对比，
 两种攻击的语义不对等、结论有误导，因此重做了 v2，v1 仅保留作为追溯，不再引用其结论。
+
+## 论文与引用
+
+论文（独立作者预印本，CC BY）：Zhiqian Lin. *Reproducible Design-Space Study of Lightweight
+Lattice-Based Authentication and Signatures for Blockchain Transactions*. Cryptology ePrint
+Archive, Paper 2026/1925, Sep 2026. https://eprint.iacr.org/2026/1925
+
+```
+@misc{cryptoeprint:2026/1925,
+  author       = {Zhiqian Lin},
+  title        = {Reproducible Design-Space Study of Lightweight Lattice-Based Authentication and Signatures for Blockchain Transactions},
+  howpublished = {Cryptology {ePrint} Archive, Paper 2026/1925},
+  year         = {2026},
+  url          = {https://eprint.iacr.org/2026/1925}
+}
+```
+
+代码与数据的归档版本见 Zenodo：https://doi.org/10.5281/zenodo.22659733（`CITATION.cff` 里同时给出了
+论文与软件两条引用）。论文的自我定位是**方法学贡献**——可复现的设计空间研究加上评测方法学，
+不声称新的可证明安全方案，也不声称形式化安全证明。
 
 ## 说明
 
