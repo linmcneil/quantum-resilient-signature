@@ -121,3 +121,5 @@ Archive, Paper 2026/1925, Sep 2026. https://eprint.iacr.org/2026/1925
 ## 说明
 
 本项目在代码编写、文档整理与实验过程中使用了 AI 辅助编程工具（OpenAI Codex），作者对全部代码、实验数据和结论进行了人工核对；仓库与论文内容仅代表作者个人工作。
+
+英文版说明见 `README.en.md`；论文与代码/数据的引用条目见 `CITATION.cff`。
